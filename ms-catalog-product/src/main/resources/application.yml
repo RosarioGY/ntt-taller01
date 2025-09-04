@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: catalog-service
+  data:
+    mongodb:
+      host: localhost
+      port: 27017
+      database: catalog
+
+server:
+  port: 8080
+
+# OpenAPI/Swagger configuration
+springdoc:
+  api-docs:
+    path: /api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+
+logging:
+  level:
+    org.springframework.data.mongodb: DEBUG
