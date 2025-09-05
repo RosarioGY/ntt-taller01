@@ -1,7 +1,7 @@
 package org.example.catalog.dto;
 
 import lombok.Data;
-import jakarta.validation.constraints.Positive;
+import javax.validation.constraints.Positive;
 
 @Data
 public class ChangeStockRequest {

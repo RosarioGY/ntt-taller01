@@ -1,0 +1,572 @@
+{
+  "info": {
+    "name": "Inventory Microservice API",
+    "description": "Collection completa para probar el microservicio de inventario con gestión de stock, reservas y movimientos",
+    "version": "1.0.0",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8081/api",
+      "type": "string"
+    },
+    {
+      "key": "reservationId",
+      "value": "",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "General",
+      "item": [
+        {
+          "name": "API Info",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "pm.test(\"Response has service info\", function () {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.expect(jsonData).to.have.property('service');",
+                  "    pm.expect(jsonData).to.have.property('version');",
+                  "    pm.expect(jsonData).to.have.property('status');",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/",
+              "host": ["{{baseUrl}}"],
+              "path": [""]
+            },
+            "description": "Obtiene información general del microservicio y endpoints disponibles"
+          },
+          "response": []
+        },
+        {
+          "name": "Health Check",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "pm.test(\"Service is UP\", function () {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.expect(jsonData.status).to.eql('UP');",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/health",
+              "host": ["{{baseUrl}}"],
+              "path": ["health"]
+            },
+            "description": "Verifica el estado de salud del microservicio"
+          },
+          "response": []
+        }
+      ],
+      "description": "Endpoints generales del microservicio"
+    },
+    {
+      "name": "Inventory Management",
+      "item": [
+        {
+          "name": "Get Stock - PROD-001",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "pm.test(\"Response has stock info\", function () {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.expect(jsonData).to.have.property('product_id');",
+                  "    pm.expect(jsonData).to.have.property('on_hand');",
+                  "    pm.expect(jsonData).to.have.property('reserved');",
+                  "    pm.expect(jsonData).to.have.property('available');",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/inventory?productId=PROD-001",
+              "host": ["{{baseUrl}}"],
+              "path": ["inventory"],
+              "query": [
+                {
+                  "key": "productId",
+                  "value": "PROD-001",
+                  "description": "ID del producto"
+                }
+              ]
+            },
+            "description": "Consulta el stock del producto PROD-001"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Stock - PROD-002",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/inventory?productId=PROD-002",
+              "host": ["{{baseUrl}}"],
+              "path": ["inventory"],
+              "query": [
+                {
+                  "key": "productId",
+                  "value": "PROD-002"
+                }
+              ]
+            },
+            "description": "Consulta el stock del producto PROD-002"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Stock - PROD-003",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/inventory?productId=PROD-003",
+              "host": ["{{baseUrl}}"],
+              "path": ["inventory"],
+              "query": [
+                {
+                  "key": "productId",
+                  "value": "PROD-003"
+                }
+              ]
+            },
+            "description": "Consulta el stock del producto PROD-003"
+          },
+          "response": []
+        },
+        {
+          "name": "Restock Product",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"quantity\": 50,\n  \"reference\": \"RESTOCK-TEST-001\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/inventory/PROD-001/restock",
+              "host": ["{{baseUrl}}"],
+              "path": ["inventory", "PROD-001", "restock"]
+            },
+            "description": "Agrega stock al producto PROD-001"
+          },
+          "response": []
+        }
+      ],
+      "description": "Endpoints para gestión de inventario y stock"
+    },
+    {
+      "name": "Reservations",
+      "item": [
+        {
+          "name": "Create Reservation - Single Item",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "if (pm.response.code === 201) {",
+                  "    pm.test(\"Status code is 201\", function () {",
+                  "        pm.response.to.have.status(201);",
+                  "    });",
+                  "    ",
+                  "    pm.test(\"Response has reservation info\", function () {",
+                  "        var jsonData = pm.response.json();",
+                  "        pm.expect(jsonData).to.have.property('reservation_id');",
+                  "        pm.expect(jsonData).to.have.property('order_id');",
+                  "        pm.expect(jsonData).to.have.property('items');",
+                  "        ",
+                  "        // Save reservation ID for future requests",
+                  "        pm.collectionVariables.set('reservationId', jsonData.reservation_id);",
+                  "    });",
+                  "} else if (pm.response.code === 409) {",
+                  "    pm.test(\"Insufficient stock - Status code is 409\", function () {",
+                  "        pm.response.to.have.status(409);",
+                  "    });",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"orderId\": \"ORDER-TEST-{{$timestamp}}\",\n  \"items\": [\n    {\n      \"productId\": \"PROD-001\",\n      \"quantity\": 5\n    }\n  ]\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/reservations",
+              "host": ["{{baseUrl}}"],
+              "path": ["reservations"]
+            },
+            "description": "Crea una reserva para un solo producto"
+          },
+          "response": []
+        },
+        {
+          "name": "Create Reservation - Multiple Items",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "if (pm.response.code === 201) {",
+                  "    pm.test(\"Status code is 201\", function () {",
+                  "        pm.response.to.have.status(201);",
+                  "    });",
+                  "    ",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.collectionVariables.set('reservationId', jsonData.reservation_id);",
+                  "} else if (pm.response.code === 409) {",
+                  "    pm.test(\"Insufficient stock - Status code is 409\", function () {",
+                  "        pm.response.to.have.status(409);",
+                  "    });",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"orderId\": \"ORDER-MULTI-{{$timestamp}}\",\n  \"items\": [\n    {\n      \"productId\": \"PROD-001\",\n      \"quantity\": 3\n    },\n    {\n      \"productId\": \"PROD-002\",\n      \"quantity\": 2\n    },\n    {\n      \"productId\": \"PROD-003\",\n      \"quantity\": 1\n    }\n  ]\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/reservations",
+              "host": ["{{baseUrl}}"],
+              "path": ["reservations"]
+            },
+            "description": "Crea una reserva para múltiples productos"
+          },
+          "response": []
+        },
+        {
+          "name": "Confirm Reservation",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  "if (!pm.collectionVariables.get('reservationId')) {",
+                  "    throw new Error('No reservation ID available. Create a reservation first.');",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/reservations/{{reservationId}}/confirm",
+              "host": ["{{baseUrl}}"],
+              "path": ["reservations", "{{reservationId}}", "confirm"]
+            },
+            "description": "Confirma una reserva existente (usa el ID de la última reserva creada)"
+          },
+          "response": []
+        },
+        {
+          "name": "Release Reservation",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  "if (!pm.collectionVariables.get('reservationId')) {",
+                  "    throw new Error('No reservation ID available. Create a reservation first.');",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/reservations/{{reservationId}}/release",
+              "host": ["{{baseUrl}}"],
+              "path": ["reservations", "{{reservationId}}", "release"]
+            },
+            "description": "Libera una reserva existente (usa el ID de la última reserva creada)"
+          },
+          "response": []
+        },
+        {
+          "name": "Test Insufficient Stock",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 409 - Insufficient Stock\", function () {",
+                  "    pm.response.to.have.status(409);",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"orderId\": \"ORDER-FAIL-{{$timestamp}}\",\n  \"items\": [\n    {\n      \"productId\": \"PROD-001\",\n      \"quantity\": 10000\n    }\n  ]\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/reservations",
+              "host": ["{{baseUrl}}"],
+              "path": ["reservations"]
+            },
+            "description": "Prueba crear una reserva con stock insuficiente (debería devolver 409)"
+          },
+          "response": []
+        }
+      ],
+      "description": "Endpoints para gestión de reservas de inventario"
+    },
+    {
+      "name": "Test Scenarios",
+      "item": [
+        {
+          "name": "Complete Workflow",
+          "item": [
+            {
+              "name": "1. Check Initial Stock",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/inventory?productId=PROD-001",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["inventory"],
+                  "query": [
+                    {
+                      "key": "productId",
+                      "value": "PROD-001"
+                    }
+                  ]
+                },
+                "description": "Paso 1: Verificar stock inicial"
+              }
+            },
+            {
+              "name": "2. Create Reservation",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "if (pm.response.code === 201) {",
+                      "    var jsonData = pm.response.json();",
+                      "    pm.collectionVariables.set('workflowReservationId', jsonData.reservation_id);",
+                      "}"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"orderId\": \"WORKFLOW-{{$timestamp}}\",\n  \"items\": [\n    {\n      \"productId\": \"PROD-001\",\n      \"quantity\": 2\n    }\n  ]\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/reservations",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["reservations"]
+                },
+                "description": "Paso 2: Crear reserva"
+              }
+            },
+            {
+              "name": "3. Check Stock After Reservation",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/inventory?productId=PROD-001",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["inventory"],
+                  "query": [
+                    {
+                      "key": "productId",
+                      "value": "PROD-001"
+                    }
+                  ]
+                },
+                "description": "Paso 3: Verificar stock después de la reserva"
+              }
+            },
+            {
+              "name": "4. Confirm Reservation",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/reservations/{{workflowReservationId}}/confirm",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["reservations", "{{workflowReservationId}}", "confirm"]
+                },
+                "description": "Paso 4: Confirmar reserva"
+              }
+            },
+            {
+              "name": "5. Check Final Stock",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/inventory?productId=PROD-001",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["inventory"],
+                  "query": [
+                    {
+                      "key": "productId",
+                      "value": "PROD-001"
+                    }
+                  ]
+                },
+                "description": "Paso 5: Verificar stock final después de confirmar"
+              }
+            }
+          ],
+          "description": "Flujo completo: consultar → reservar → verificar → confirmar → verificar final"
+        }
+      ],
+      "description": "Escenarios de prueba completos para validar el funcionamiento del microservicio"
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ]
+}
+

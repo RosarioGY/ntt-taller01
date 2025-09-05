@@ -1,6 +1,6 @@
 package org.example.catalog.controller;
 
-import jakarta.validation.Valid;
+import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.example.catalog.dto.ChangeStockRequest;
 import org.example.catalog.dto.PurchaseRequest;
