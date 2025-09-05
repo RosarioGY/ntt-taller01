@@ -1,137 +1,99 @@
-<mxfile host="app.diagrams.net" modified="2025-09-04T00:00:00.000Z" agent="5.0" etag="xml_generated" version="24.2.5" type="device">
-  <diagram name="Microservices Architecture" id="microservices-arch">
-    <mxGraphModel dx="1422" dy="765" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
-      <root>
-        <mxCell id="0" />
-        <mxCell id="1" parent="0" />
-        
-        <!-- Title -->
-        <mxCell id="title" value="Microservices Product Management Architecture" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=20;fontStyle=1;" vertex="1" parent="1">
-          <mxGeometry x="400" y="30" width="400" height="30" as="geometry" />
-        </mxCell>
-        
-        <!-- Postman Client -->
-        <mxCell id="postman" value="&lt;div style=&quot;font-size: 14px;&quot;&gt;&lt;b&gt;Postman&lt;/b&gt;&lt;/div&gt;&lt;div style=&quot;font-size: 12px;&quot;&gt;Pruebas Manuales&lt;/div&gt;&lt;div style=&quot;font-size: 10px;&quot;&gt;• Test CRUD productos&lt;/div&gt;&lt;div style=&quot;font-size: 10px;&quot;&gt;• Test compras&lt;/div&gt;&lt;div style=&quot;font-size: 10px;&quot;&gt;• Validaciones&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontFamily=Helvetica;" vertex="1" parent="1">
-          <mxGeometry x="520" y="100" width="160" height="80" as="geometry" />
-        </mxCell>
-        
-        <!-- Order Service -->
-        <mxCell id="order-service" value="&lt;div style=&quot;font-size: 14px;&quot;&gt;&lt;b&gt;Order Service&lt;/b&gt;&lt;/div&gt;&lt;div style=&quot;font-size: 12px;&quot;&gt;Compras + Validación Stock&lt;/div&gt;&lt;div style=&quot;font-size: 10px;&quot;&gt;• POST /orders/purchase&lt;/div&gt;&lt;div style=&quot;font-size: 10px;&quot;&gt;• Validar stock disponible&lt;/div&gt;&lt;div style=&quot;font-size: 10px;&quot;&gt;• Descontar stock&lt;/div&gt;&lt;div style=&quot;font-size: 10px;&quot;&gt;• Registrar órdenes&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontFamily=Helvetica;" vertex="1" parent="1">
-          <mxGeometry x="320" y="240" width="180" height="100" as="geometry" />
-        </mxCell>
-        
-        <!-- Catalog Service -->
-        <mxCell id="catalog-service" value="&lt;div style=&quot;font-size: 14px;&quot;&gt;&lt;b&gt;Catalog Service&lt;/b&gt;&lt;/div&gt;&lt;div style=&quot;font-size: 12px;&quot;&gt;CRUD Productos + Gestión Stock&lt;/div&gt;&lt;div style=&quot;font-size: 10px;&quot;&gt;• GET /products&lt;/div&gt;&lt;div style=&quot;font-size: 10px;&quot;&gt;• POST /products&lt;/div&gt;&lt;div style=&quot;font-size: 10px;&quot;&gt;• PUT /products/{id}&lt;/div&gt;&lt;div style=&quot;font-size: 10px;&quot;&gt;• DELETE /products/{id}&lt;/div&gt;&lt;div style=&quot;font-size: 10px;&quot;&gt;• POST /products/{id}/add-stock&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontFamily=Helvetica;" vertex="1" parent="1">
-          <mxGeometry x="720" y="240" width="200" height="120" as="geometry" />
-        </mxCell>
-        
-        <!-- MongoDB Orders -->
-        <mxCell id="mongo-orders" value="&lt;div style=&quot;font-size: 14px;&quot;&gt;&lt;b&gt;MongoDB Orders&lt;/b&gt;&lt;/div&gt;&lt;div style=&quot;font-size: 12px;&quot;&gt;Orders Collection&lt;/div&gt;&lt;div style=&quot;font-size: 10px;&quot;&gt;• OrderId&lt;/div&gt;&lt;div style=&quot;font-size: 10px;&quot;&gt;• ProductId&lt;/div&gt;&lt;div style=&quot;font-size: 10px;&quot;&gt;• Quantity&lt;/div&gt;&lt;div style=&quot;font-size: 10px;&quot;&gt;• Total&lt;/div&gt;&lt;div style=&quot;font-size: 10px;&quot;&gt;• Timestamp&lt;/div&gt;" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;fillColor=#d5e8d4;strokeColor=#82b366;fontFamily=Helvetica;" vertex="1" parent="1">
-          <mxGeometry x="320" y="420" width="180" height="100" as="geometry" />
-        </mxCell>
-        
-        <!-- MongoDB Catalog -->
-        <mxCell id="mongo-catalog" value="&lt;div style=&quot;font-size: 14px;&quot;&gt;&lt;b&gt;MongoDB Catalog&lt;/b&gt;&lt;/div&gt;&lt;div style=&quot;font-size: 12px;&quot;&gt;Products Collection&lt;/div&gt;&lt;div style=&quot;font-size: 10px;&quot;&gt;• Id (único)&lt;/div&gt;&lt;div style=&quot;font-size: 10px;&quot;&gt;• Nombre (alfanumérico)&lt;/div&gt;&lt;div style=&quot;font-size: 10px;&quot;&gt;• Precio (decimal)&lt;/div&gt;&lt;div style=&quot;font-size: 10px;&quot;&gt;• Stock (entero)&lt;/div&gt;" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;fillColor=#d5e8d4;strokeColor=#82b366;fontFamily=Helvetica;" vertex="1" parent="1">
-          <mxGeometry x="720" y="420" width="200" height="100" as="geometry" />
-        </mxCell>
-        
-        <!-- Connection: Postman to Order Service -->
-        <mxCell id="conn1" value="HTTP REST API&lt;br&gt;POST /orders/purchase" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;startArrow=classic;startFill=1;endArrow=classic;endFill=1;strokeWidth=2;fontFamily=Helvetica;fontSize=10;" edge="1" parent="1" source="postman" target="order-service">
-          <mxGeometry relative="1" as="geometry">
-            <Array as="points">
-              <mxPoint x="550" y="200" />
-              <mxPoint x="410" y="200" />
-            </Array>
-          </mxGeometry>
-        </mxCell>
-        
-        <!-- Connection: Postman to Catalog Service -->
-        <mxCell id="conn2" value="HTTP REST API&lt;br&gt;CRUD Productos" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;startArrow=classic;startFill=1;endArrow=classic;endFill=1;strokeWidth=2;fontFamily=Helvetica;fontSize=10;" edge="1" parent="1" source="postman" target="catalog-service">
-          <mxGeometry relative="1" as="geometry">
-            <Array as="points">
-              <mxPoint x="650" y="200" />
-              <mxPoint x="820" y="200" />
-            </Array>
-          </mxGeometry>
-        </mxCell>
-        
-        <!-- Connection: Order Service to Catalog Service (Stock Validation) -->
-        <mxCell id="conn3" value="1. Consultar Stock&lt;br&gt;GET /products/{id}/stock" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=classic;endFill=1;strokeWidth=2;fontFamily=Helvetica;fontSize=10;strokeColor=#ff6600;" edge="1" parent="1" source="order-service" target="catalog-service">
-          <mxGeometry relative="1" as="geometry">
-            <Array as="points">
-              <mxPoint x="560" y="270" />
-              <mxPoint x="660" y="270" />
-            </Array>
-          </mxGeometry>
-        </mxCell>
-        
-        <!-- Connection: Order Service to Catalog Service (Stock Reduction) -->
-        <mxCell id="conn4" value="2. Descontar Stock&lt;br&gt;POST /products/{id}/reduce-stock" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=classic;endFill=1;strokeWidth=2;fontFamily=Helvetica;fontSize=10;strokeColor=#ff6600;" edge="1" parent="1" source="order-service" target="catalog-service">
-          <mxGeometry relative="1" as="geometry">
-            <Array as="points">
-              <mxPoint x="560" y="310" />
-              <mxPoint x="660" y="310" />
-            </Array>
-          </mxGeometry>
-        </mxCell>
-        
-        <!-- Connection: Order Service to MongoDB Orders -->
-        <mxCell id="conn5" value="Orders CRUD&lt;br&gt;Registrar Órdenes" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;startArrow=classic;startFill=1;endArrow=classic;endFill=1;strokeWidth=2;fontFamily=Helvetica;fontSize=10;" edge="1" parent="1" source="order-service" target="mongo-orders">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        
-        <!-- Connection: Catalog Service to MongoDB Catalog -->
-        <mxCell id="conn6" value="Products CRUD&lt;br&gt;Gestión Productos y Stock" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;startArrow=classic;startFill=1;endArrow=classic;endFill=1;strokeWidth=2;fontFamily=Helvetica;fontSize=10;" edge="1" parent="1" source="catalog-service" target="mongo-catalog">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        
-        <!-- Flow Legend -->
-        <mxCell id="legend-title" value="Flujo de Compra:" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=14;fontStyle=1;" vertex="1" parent="1">
-          <mxGeometry x="40" y="400" width="120" height="20" as="geometry" />
-        </mxCell>
-        
-        <mxCell id="legend1" value="1. Postman envía purchase request" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=10;" vertex="1" parent="1">
-          <mxGeometry x="40" y="420" width="200" height="15" as="geometry" />
-        </mxCell>
-        
-        <mxCell id="legend2" value="2. Order Service valida stock en Catalog" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=10;" vertex="1" parent="1">
-          <mxGeometry x="40" y="435" width="200" height="15" as="geometry" />
-        </mxCell>
-        
-        <mxCell id="legend3" value="3. Si válido: descuenta stock" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=10;" vertex="1" parent="1">
-          <mxGeometry x="40" y="450" width="200" height="15" as="geometry" />
-        </mxCell>
-        
-        <mxCell id="legend4" value="4. Registra orden en MongoDB" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=10;" vertex="1" parent="1">
-          <mxGeometry x="40" y="465" width="200" height="15" as="geometry" />
-        </mxCell>
-        
-        <mxCell id="legend5" value="5. Respuesta a Postman" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=10;" vertex="1" parent="1">
-          <mxGeometry x="40" y="480" width="200" height="15" as="geometry" />
-        </mxCell>
-        
-        <!-- Validation Notes -->
-        <mxCell id="validation-title" value="Validaciones del Sistema:" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=14;fontStyle=1;" vertex="1" parent="1">
-          <mxGeometry x="40" y="520" width="180" height="20" as="geometry" />
-        </mxCell>
-        
-        <mxCell id="validation1" value="✓ Stock validado antes de compra" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=10;" vertex="1" parent="1">
-          <mxGeometry x="40" y="540" width="200" height="15" as="geometry" />
-        </mxCell>
-        
-        <mxCell id="validation2" value="✓ Separación de responsabilidades" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=10;" vertex="1" parent="1">
-          <mxGeometry x="40" y="555" width="200" height="15" as="geometry" />
-        </mxCell>
-        
-        <mxCell id="validation3" value="✓ Bases de datos independientes" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=10;" vertex="1" parent="1">
-          <mxGeometry x="40" y="570" width="200" height="15" as="geometry" />
-        </mxCell>
-        
-        <mxCell id="validation4" value="✓ Esquema de datos completo" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=10;" vertex="1" parent="1">
-          <mxGeometry x="40" y="585" width="200" height="15" as="geometry" />
-        </mxCell>
-        
-      </root>
-    </mxGraphModel>
-  </diagram>
+<mxfile host="65bd71144e">
+    <diagram name="Microservices Architecture" id="microservices-arch">
+        <mxGraphModel dx="486" dy="419" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="title" value="Microservices Product Management Architecture" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=20;fontStyle=1;" parent="1" vertex="1">
+                    <mxGeometry x="400" y="30" width="400" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="postman" value="&lt;div style=&quot;font-size: 14px;&quot;&gt;&lt;b&gt;Postman&lt;/b&gt;&lt;/div&gt;&lt;div style=&quot;font-size: 12px;&quot;&gt;Pruebas Manuales&lt;/div&gt;&lt;div style=&quot;font-size: 10px;&quot;&gt;• Test CRUD productos&lt;/div&gt;&lt;div style=&quot;font-size: 10px;&quot;&gt;• Test compras&lt;/div&gt;&lt;div style=&quot;font-size: 10px;&quot;&gt;• Validaciones&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontFamily=Helvetica;" parent="1" vertex="1">
+                    <mxGeometry x="520" y="100" width="160" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="order-service" value="&lt;div style=&quot;&quot;&gt;&lt;span style=&quot;color: rgb(63, 63, 63); background-color: transparent; font-size: 14px;&quot;&gt;&lt;b&gt;ms inventory&lt;/b&gt;&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;&quot;&gt;&lt;span style=&quot;font-size: 12px; color: rgb(63, 63, 63); background-color: transparent;&quot;&gt;Compras + Validación Stock&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;font-size: 10px;&quot;&gt;&lt;span style=&quot;color: rgb(63, 63, 63); background-color: transparent;&quot;&gt;•&lt;/span&gt;&lt;span style=&quot;color: rgb(63, 63, 63); background-color: transparent;&quot;&gt;&amp;nbsp;&lt;/span&gt;GET /inventory?productId=...&lt;/div&gt;&lt;div style=&quot;font-size: 10px;&quot;&gt;&lt;span style=&quot;color: rgb(63, 63, 63); background-color: transparent;&quot;&gt;•&lt;/span&gt;&lt;span style=&quot;color: rgb(63, 63, 63); background-color: transparent;&quot;&gt;&amp;nbsp;&lt;/span&gt;POST /inventory/{productId}/restock&lt;/div&gt;&lt;div style=&quot;font-size: 10px;&quot;&gt;&lt;span style=&quot;color: rgb(63, 63, 63); background-color: transparent;&quot;&gt;•&lt;/span&gt;&lt;span style=&quot;color: rgb(63, 63, 63); background-color: transparent;&quot;&gt;&amp;nbsp;&lt;/span&gt;POST /reservations&lt;/div&gt;&lt;div style=&quot;font-size: 10px;&quot;&gt;&lt;span style=&quot;color: rgb(63, 63, 63); background-color: transparent;&quot;&gt;•&lt;/span&gt;&lt;span style=&quot;color: rgb(63, 63, 63); background-color: transparent;&quot;&gt;&amp;nbsp;&lt;/span&gt;POST /reservations/{reservationId}/confirm&lt;/div&gt;&lt;div style=&quot;font-size: 10px;&quot;&gt;&lt;span style=&quot;color: rgb(63, 63, 63); background-color: transparent;&quot;&gt;•&lt;/span&gt;&lt;span style=&quot;color: rgb(63, 63, 63); background-color: transparent;&quot;&gt;&amp;nbsp;&lt;/span&gt;POST /reservations/{reservationId}/release&lt;/div&gt;&lt;div style=&quot;font-size: 10px;&quot;&gt;&lt;br&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontFamily=Helvetica;" parent="1" vertex="1">
+                    <mxGeometry x="280" y="240" width="220" height="120" as="geometry"/>
+                </mxCell>
+                <mxCell id="catalog-service" value="&lt;div style=&quot;font-size: 14px;&quot;&gt;&lt;b&gt;ms catalog service&lt;/b&gt;&lt;/div&gt;&lt;div style=&quot;font-size: 12px;&quot;&gt;CRUD Productos + Gestión Stock&lt;/div&gt;&lt;div style=&quot;font-size: 10px;&quot;&gt;• GET /products&lt;/div&gt;&lt;div style=&quot;font-size: 10px;&quot;&gt;• POST /products&lt;/div&gt;&lt;div style=&quot;font-size: 10px;&quot;&gt;•&amp;nbsp;GET /products/{id}&lt;/div&gt;&lt;div style=&quot;font-size: 10px;&quot;&gt;&lt;span style=&quot;color: rgb(63, 63, 63); background-color: transparent;&quot;&gt;•&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;background-color: transparent; font-size: 12px;&quot;&gt;PATCH /products/{id}&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;font-size: 10px;&quot;&gt;&lt;span style=&quot;color: rgb(63, 63, 63); background-color: transparent;&quot;&gt;•&amp;nbsp;&lt;/span&gt;DELETE /products/{id}&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontFamily=Helvetica;" parent="1" vertex="1">
+                    <mxGeometry x="720" y="240" width="200" height="120" as="geometry"/>
+                </mxCell>
+                <mxCell id="mongo-orders" value="&lt;div style=&quot;font-size: 14px;&quot;&gt;&lt;b&gt;MongoDB Inventory&lt;/b&gt;&lt;/div&gt;&lt;div style=&quot;font-size: 12px;&quot;&gt;Inventory Collection&lt;/div&gt;&lt;div style=&quot;font-size: 10px;&quot;&gt;•&amp;nbsp;&lt;span style=&quot;color: rgb(63, 63, 63); background-color: rgb(255, 255, 255); font-family: &amp;quot;Source Code Pro&amp;quot;, Menlo, monospace; font-weight: bold; text-align: start; font-size: 12px;&quot;&gt;productId&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;box-sizing: border-box; -webkit-font-smoothing: antialiased; user-select: text; outline-color: rgb(4, 152, 236); flex: 1 1 0%; min-width: 0px; max-width: 100%; color: rgb(61, 79, 88); font-family: &amp;quot;Source Code Pro&amp;quot;, Menlo, monospace; text-align: start; background-color: rgb(255, 255, 255);&quot; data-testid=&quot;hadron-document-element-value&quot; class=&quot;leafygreen-ui-gzqbgx&quot;&gt;&lt;div style=&quot;box-sizing: border-box; -webkit-font-smoothing: antialiased; user-select: text; outline-color: rgb(4, 152, 236);&quot; data-testid=&quot;hadron-document-clickable-value&quot;&gt;&lt;/div&gt;&lt;/div&gt;&lt;div style=&quot;font-size: 10px;&quot;&gt;•&amp;nbsp;&lt;span style=&quot;background-color: rgb(255, 255, 255); color: rgb(61, 79, 88); font-family: &amp;quot;Source Code Pro&amp;quot;, Menlo, monospace; font-weight: 700; text-align: start; font-size: 12px;&quot;&gt;onHand&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;font-size: 10px;&quot;&gt;&lt;span style=&quot;color: rgb(63, 63, 63); background-color: transparent;&quot;&gt;•&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;background-color: rgb(232, 237, 235); color: rgb(61, 79, 88); font-family: &amp;quot;Source Code Pro&amp;quot;, Menlo, monospace; font-weight: 700; text-align: start; font-size: 12px;&quot;&gt;reserved&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;font-size: 10px;&quot;&gt;•&amp;nbsp;&lt;span style=&quot;background-color: rgb(255, 255, 255); color: rgb(61, 79, 88); font-family: &amp;quot;Source Code Pro&amp;quot;, Menlo, monospace; font-weight: 700; text-align: start; font-size: 12px;&quot;&gt;version&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;font-size: 10px;&quot;&gt;•&amp;nbsp;&lt;span style=&quot;background-color: rgb(255, 255, 255); color: rgb(61, 79, 88); font-family: &amp;quot;Source Code Pro&amp;quot;, Menlo, monospace; font-weight: 700; text-align: start; font-size: 12px;&quot;&gt;_class&lt;/span&gt;&lt;/div&gt;" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;fillColor=#d5e8d4;strokeColor=#82b366;fontFamily=Helvetica;" parent="1" vertex="1">
+                    <mxGeometry x="300" y="435" width="180" height="150" as="geometry"/>
+                </mxCell>
+                <mxCell id="mongo-catalog" value="&lt;div style=&quot;font-size: 14px;&quot;&gt;&lt;b&gt;MongoDB Catalog&lt;/b&gt;&lt;/div&gt;&lt;div style=&quot;font-size: 12px;&quot;&gt;Products Collection&lt;/div&gt;&lt;div style=&quot;font-size: 10px;&quot;&gt;• Id (único)&lt;/div&gt;&lt;div style=&quot;font-size: 10px;&quot;&gt;• Nombre (alfanumérico)&lt;/div&gt;&lt;div style=&quot;font-size: 10px;&quot;&gt;• Precio (decimal)&lt;/div&gt;&lt;div style=&quot;font-size: 10px;&quot;&gt;• Stock (entero)&lt;/div&gt;" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;fillColor=#d5e8d4;strokeColor=#82b366;fontFamily=Helvetica;" parent="1" vertex="1">
+                    <mxGeometry x="720" y="420" width="200" height="100" as="geometry"/>
+                </mxCell>
+                <mxCell id="conn1" value="HTTP REST API&lt;br&gt;POST /orders/purchase" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;startArrow=classic;startFill=1;endArrow=classic;endFill=1;strokeWidth=2;fontFamily=Helvetica;fontSize=10;" parent="1" source="postman" target="order-service" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="550" y="200"/>
+                            <mxPoint x="410" y="200"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="conn2" value="HTTP REST API&lt;br&gt;CRUD Productos" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;startArrow=classic;startFill=1;endArrow=classic;endFill=1;strokeWidth=2;fontFamily=Helvetica;fontSize=10;" parent="1" source="postman" target="catalog-service" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="650" y="200"/>
+                            <mxPoint x="820" y="200"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="conn3" value="1. Consultar Stock&lt;br&gt;GET /products/{id}/stock" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=classic;endFill=1;strokeWidth=2;fontFamily=Helvetica;fontSize=10;strokeColor=#ff6600;" parent="1" source="order-service" target="catalog-service" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="560" y="270"/>
+                            <mxPoint x="660" y="270"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="conn4" value="2. Descontar Stock&lt;br&gt;POST /products/{id}/reduce-stock" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=classic;endFill=1;strokeWidth=2;fontFamily=Helvetica;fontSize=10;strokeColor=#ff6600;" parent="1" source="order-service" target="catalog-service" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="560" y="310"/>
+                            <mxPoint x="660" y="310"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="conn5" value="Orders CRUD&lt;br&gt;Registrar Órdenes" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;startArrow=classic;startFill=1;endArrow=classic;endFill=1;strokeWidth=2;fontFamily=Helvetica;fontSize=10;" parent="1" source="order-service" target="mongo-orders" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="conn6" value="Products CRUD&lt;br&gt;Gestión Productos y Stock" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;startArrow=classic;startFill=1;endArrow=classic;endFill=1;strokeWidth=2;fontFamily=Helvetica;fontSize=10;" parent="1" source="catalog-service" target="mongo-catalog" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="legend-title" value="Flujo de Compra:" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=14;fontStyle=1;" parent="1" vertex="1">
+                    <mxGeometry x="40" y="400" width="120" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="legend1" value="1. Postman envía purchase request" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=10;" parent="1" vertex="1">
+                    <mxGeometry x="40" y="420" width="200" height="15" as="geometry"/>
+                </mxCell>
+                <mxCell id="legend2" value="2. Order Service valida stock en Catalog" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=10;" parent="1" vertex="1">
+                    <mxGeometry x="40" y="435" width="200" height="15" as="geometry"/>
+                </mxCell>
+                <mxCell id="legend3" value="3. Si válido: descuenta stock" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=10;" parent="1" vertex="1">
+                    <mxGeometry x="40" y="450" width="200" height="15" as="geometry"/>
+                </mxCell>
+                <mxCell id="legend4" value="4. Registra orden en MongoDB" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=10;" parent="1" vertex="1">
+                    <mxGeometry x="40" y="465" width="200" height="15" as="geometry"/>
+                </mxCell>
+                <mxCell id="legend5" value="5. Respuesta a Postman" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=10;" parent="1" vertex="1">
+                    <mxGeometry x="40" y="480" width="200" height="15" as="geometry"/>
+                </mxCell>
+                <mxCell id="validation-title" value="Validaciones del Sistema:" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=14;fontStyle=1;" parent="1" vertex="1">
+                    <mxGeometry x="40" y="520" width="180" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="validation1" value="✓ Stock validado antes de compra" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=10;" parent="1" vertex="1">
+                    <mxGeometry x="40" y="540" width="200" height="15" as="geometry"/>
+                </mxCell>
+                <mxCell id="validation2" value="✓ Separación de responsabilidades" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=10;" parent="1" vertex="1">
+                    <mxGeometry x="40" y="555" width="200" height="15" as="geometry"/>
+                </mxCell>
+                <mxCell id="validation3" value="✓ Bases de datos independientes" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=10;" parent="1" vertex="1">
+                    <mxGeometry x="40" y="570" width="200" height="15" as="geometry"/>
+                </mxCell>
+                <mxCell id="validation4" value="✓ Esquema de datos completo" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=10;" parent="1" vertex="1">
+                    <mxGeometry x="40" y="585" width="200" height="15" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
 </mxfile>
